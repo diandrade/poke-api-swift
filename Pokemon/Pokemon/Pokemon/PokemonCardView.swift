@@ -8,14 +8,25 @@
 import SwiftUI
 
 struct PokemonCardView: View {
-    var pokemon: Pokemon
+    var pokemon: Response
+    var backgroundGradient: LinearGradient {
+        return TypeColor.gradient(for: pokemon.typeNames.first ?? "normal")
+    }
+
     var body: some View {
-        VStack {
-            Text(pokemon.name)
+        ZStack {
+            Color.white.ignoresSafeArea()
+            
+            VStack {
+                Text(pokemon.name.capitalized)
+                    .font(.headline)
+                    .padding(.bottom, 10)
+            }
+            .frame(width: 200, height: 250)
+            .background(backgroundGradient)
+            .cornerRadius(20)
+            .shadow(color: .gray.opacity(0.5), radius: 10, x: 0, y: 5)
+            .padding()
         }
-        .frame(maxWidth: .infinity)
-        .frame(height: 150)
-        .background(.blue)
-        .clipShape(.rect(cornerRadius: 16))
     }
 }

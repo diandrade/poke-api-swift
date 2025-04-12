@@ -1,18 +1,20 @@
-//
-//  Pokemon.swift
-//  Pokemon
-//
-//  Created by iOSLab on 05/04/25.
-//
-
-import Foundation
-
 struct Response: Decodable {
-    let next: String
-    let results: [Pokemon]
-}
-
-struct Pokemon: Identifiable, Decodable {
-    let id = UUID()
+    let id: Int
     let name: String
+    let types: [PokemonTypeEntry]
+    let sprites: Sprites
+
+    struct Sprites: Decodable {
+        let front_default: String
+    }
+
+    struct PokemonTypeEntry: Decodable {
+        let slot: Int
+        let type: PokemonType
+    }
+
+    struct PokemonType: Decodable {
+        let name: String
+    }
+    
 }
